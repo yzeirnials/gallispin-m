@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     auto partition_result = partition(*ele->entry());
 
     std::ofstream file;
-    file.open("part-ingress.hir", std::ios::trunc);
+    file.open("part-PRE.hir", std::ios::trunc);
     auto printer = [](std::ostream& os, const HIR::Operation& op) {
         op.print(os);
         if (op.dst_vars.size() > 0) {
@@ -59,12 +59,12 @@ int main(int argc, char *argv[]) {
     file << std::endl;
     file.close();
 
-    file.open("part-cpu.hir", std::ios::trunc);
+    file.open("part-CPU.hir", std::ios::trunc);
     partition_result.cpu->print(file);
     file << std::endl;
     file.close();
-    
-    file.open("part-egress.hir", std::ios::trunc);
+
+    file.open("part-POST.hir", std::ios::trunc);
     partition_result.post->print(file);
     file << std::endl;
     file.close();
